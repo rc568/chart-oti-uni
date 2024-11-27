@@ -1,0 +1,31 @@
+[
+    {
+        "_original_ngsi_entity_": null,
+        "calidad_de_aire": 13,
+        "compuestos_organicos": 0,
+        "dioxido_de_azufre": "36106.56",
+        "dioxido_de_carbono": 0,
+        "dioxido_de_nitrogeno": "0.00",
+        "direccion_del_viento": 135,
+        "entity_id": "CAE:scuni-007",
+        "entity_type": "CAE",
+        "fiware_servicepath": "/OTI",
+        "humedad": 86.2,
+        "indice_uv": 0,
+        "intensidad_de_sonido": 84.2,
+        "luminosidad": 0,
+        "monoxido_de_carbono": "1751.24",
+        "nivel_bateria": 4.3,
+        "oxido_nitrico": "15.93",
+        "ozono": "911.81",
+        "pm10": 17,
+        "pm1_0": 11,
+        "presion_1": 1000.7,
+        "presion_2": 21.3,
+        "sulfuro_de_hidrogeno": "0.00",
+        "temperatura_1": 21.5,
+        "temperatura_2": 21.3,
+        "time_index": "2023-12-18T03:09:23.692Z",
+        "velocidad_del_viento": 3.1
+    }
+]

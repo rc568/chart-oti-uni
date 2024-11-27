@@ -1,0 +1,18 @@
+export const properties = {
+    humedad: "Humedad (%)",
+    presion_1: "Presión (hPa)",
+    intensidad_de_sonido: "Intensidad de sonido (dB)",
+    indice_uv: "Indice UV",
+    temperatura_2: "Temperatura (°C)",
+    calidad_de_aire: "Material Particulado PM 2.5 (ppm)",
+    velocidad_del_viento: "Velocidad del viento (hm/h)",
+    direccion_del_viento: "Dirección del viento (°)",
+    monoxido_de_carbono: "Monoxido de carbono CO (ppm)",
+    dioxido_de_nitrogeno: "Dioxido de nitrogeno NO2 (ppm)",
+    dioxido_de_azufre: "Dioxido de azufre SO2 (ppm)",
+    sulfuro_de_hidrogeno: "Sulfuro de Hidrogeno H2S (ppm)",
+    ozono: "Ozono O3 (ppm)",
+    oxido_nitrico: "Oxido nitrico NO (ppm)",
+    pm1_0: "Material Particulado PM 1.0 (ppm)",
+    pm10: "Material Particulado PM 10.0 (ppm)",
+}
