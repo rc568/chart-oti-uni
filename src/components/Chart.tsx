@@ -1,19 +1,37 @@
 import { useState, useEffect } from "react";
-import { SensorData } from "../interface/data";
-import { properties } from "../data/properties";
-import { CartesianGrid, Label, Legend, Line, LineChart, Tooltip, XAxis, YAxis } from "recharts";
+import { CalidadAiresExt } from "../interface/data";
+import { propertiesNames } from "../data/properties";
+import { CartesianGrid, Line, LineChart, Tooltip, XAxis, YAxis, ResponsiveContainer, TooltipProps } from "recharts";
+import { NameType, ValueType } from "recharts/types/component/DefaultTooltipContent";
 
-const dataPath = 'src/data/simulated_data.json'
+type PropertyName = keyof typeof propertiesNames;
+const apiPath = 'src/data/simulated_data.json'
+const CustomTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameType>) => {
+    if (active && payload && payload.length) {
+        return (
+            <div className="bg-white bg-opacity-60 p-4 border">
+                <p>{new Date(label).toLocaleString()}</p>
+                <p>{propertiesNames[payload[0].dataKey as PropertyName]}: {payload[0].value}</p>
+            </div>
+        );
+    }
+
+    return null;
+};
 
 export const Chart = () => {
 
-    const [dataInfo, setDataInfo] = useState<SensorData[] | null>();
+    const [selectedProperty, setSelectedProperty] = useState('calidad_de_aire');
+    const [calidadAiresExt, setCalidadAiresExt] = useState<CalidadAiresExt[]>();
+
+
+
 
     useEffect(() => {
-        fetch(dataPath)
+        fetch(apiPath)
             .then(response => response.json())
             .then(data => {
-                setDataInfo(data)
+                setCalidadAiresExt(data)
             })
             .catch(err => {
                 throw new Error(err)
@@ -22,29 +40,75 @@ export const Chart = () => {
 
     return (
         <>
-            <Label value={properties["calidad_de_aire"]} />
-            <LineChart width={800} height={280} data={dataInfo}
-                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="entity_type" />
-                <YAxis>
-                </YAxis>
-                <Tooltip />
-                <Legend />
-                {/* <Line type="monotone" dataKey="calidad_de_aire" stroke="#8884d8" /> */}
-                <Line type="monotone" dataKey="sulfuro_de_hidrogeno" stroke="#82ca9d" />
-            </LineChart>
-            {
-                dataInfo?.slice(0, 10).map(({ calidad_de_aire, humedad, intensidad_de_sonido, presion_1, temperatura_2 }) =>
-                    <ul className="text-cyan-600 p-3">
-                        <li>{properties["calidad_de_aire"]} {calidad_de_aire}</li>
-                        <li>{properties["humedad"]} {humedad}</li>
-                        <li>{properties["intensidad_de_sonido"]} {intensidad_de_sonido}</li>
-                        <li>{properties["presion_1"]} {presion_1}</li>
-                        <li>{properties["temperatura_2"]} {temperatura_2}</li>
-                    </ul>
-                )
-            }
+            <div className="flex items-center border rounded-xl overflow-clip h-[500px]">
+                <aside className="bg-primary text-onPrimary w-[800px] h-full basis-0 px-6 place-content-center">
+                    <label className="py-3 inline-block">
+                        Parámetro Contaminante:
+                        <select
+                            value={selectedProperty}
+                            onChange={e => setSelectedProperty(e.target.value)}
+                            className="pl-3 py-2 text-sm rounded-sm text-black"
+                        >
+                            <option value="calidad_de_aire">{propertiesNames["calidad_de_aire"]}</option>
+                            <option value="humedad">{propertiesNames["humedad"]}</option>
+                            <option value="intensidad_de_sonido">{propertiesNames["intensidad_de_sonido"]}</option>
+                            <option value="presion_1">{propertiesNames["presion_1"]}</option>
+                            <option value="temperatura_2">{propertiesNames["temperatura_2"]}</option>
+                        </select>
+                    </label>
+                    <label className="py-3 inline-block">
+                        Evolución:
+                        <select
+                            value={selectedProperty}
+                            onChange={e => setSelectedProperty(e.target.value)}
+                            className="pl-3 py-2 text-sm rounded-sm text-black"
+                        >
+                            <option value="calidad_de_aire">{propertiesNames["calidad_de_aire"]}</option>
+                            <option value="humedad">{propertiesNames["humedad"]}</option>
+                            <option value="intensidad_de_sonido">{propertiesNames["intensidad_de_sonido"]}</option>
+                            <option value="presion_1">{propertiesNames["presion_1"]}</option>
+                            <option value="temperatura_2">{propertiesNames["temperatura_2"]}</option>
+                        </select>
+                    </label>
+                    <label className="py-3 inline-block">
+                        Desde:
+                        <select
+                            value={selectedProperty}
+                            onChange={e => setSelectedProperty(e.target.value)}
+                            className="pl-3 py-2 text-sm rounded-sm text-black"
+                        >
+                            <option value="calidad_de_aire">{propertiesNames["calidad_de_aire"]}</option>
+                            <option value="humedad">{propertiesNames["humedad"]}</option>
+                            <option value="intensidad_de_sonido">{propertiesNames["intensidad_de_sonido"]}</option>
+                            <option value="presion_1">{propertiesNames["presion_1"]}</option>
+                            <option value="temperatura_2">{propertiesNames["temperatura_2"]}</option>
+                        </select>
+                    </label>
+                    <label className="py-3 inline-block">
+                        Hasta:
+                        <select
+                            value={selectedProperty}
+                            onChange={e => setSelectedProperty(e.target.value)}
+                            className="pl-3 py-2 text-sm rounded-sm text-black"
+                        >
+                            <option value="calidad_de_aire">{propertiesNames["calidad_de_aire"]}</option>
+                            <option value="humedad">{propertiesNames["humedad"]}</option>
+                            <option value="intensidad_de_sonido">{propertiesNames["intensidad_de_sonido"]}</option>
+                            <option value="presion_1">{propertiesNames["presion_1"]}</option>
+                            <option value="temperatura_2">{propertiesNames["temperatura_2"]}</option>
+                        </select>
+                    </label>
+                </aside>
+                <ResponsiveContainer width="80%" height={320} >
+                    <LineChart data={calidadAiresExt} margin={{ top: 5, right: 10, left: 10, bottom: 20 }}>
+                        <CartesianGrid strokeDasharray="5" />
+                        <XAxis dataKey="time_index" tickFormatter={(date) => new Date(date).toLocaleTimeString()} tick={{ fontSize: "1em" }} label={{ value: "Tiempo", position: "bottom" }} />
+                        <YAxis label={{ value: propertiesNames[selectedProperty as PropertyName], angle: -90, position: "Left" }} width={100} />
+                        <Tooltip content={<CustomTooltip />} />
+                        <Line type="monotone" dataKey={selectedProperty} stroke="#1cbacc" />
+                    </LineChart>
+                </ResponsiveContainer>
+            </div>
         </>
     )
 }

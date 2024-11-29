@@ -1,4 +1,4 @@
-export const properties = {
+export const propertiesNames = {
     humedad: "Humedad (%)",
     presion_1: "Presión (hPa)",
     intensidad_de_sonido: "Intensidad de sonido (dB)",

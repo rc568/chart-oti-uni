@@ -1,4 +1,4 @@
-export interface SensorData {
+export interface CalidadAiresExt {
     calidad_de_aire: number;
     compuestos_organicos: number;
     dioxido_de_azufre: string;

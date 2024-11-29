@@ -7,8 +7,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        colorBG: '#FCFCFC',
+        surface: '#FCFCFC',
         primary: '#1CBACC',
+        secondary: '#2FD087',
+        onPrimary: '#FCFCFC'
       }
     },
   },
